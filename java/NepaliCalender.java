@@ -3,7 +3,8 @@ import java.util.*;
 public class NepaliCalender {
 
     static List<List<Integer>> bs = new ArrayList<>();
-    static Map<String, String> nepEngNumMap = new HashMap<>();
+    static Map<String, String> nepEngUnicodeNumMap = new HashMap<>();
+    static Map<String, String> nepEngUnicodeCharMap = new HashMap<>();
 
     public NepaliCalender() {
         bs.add(Arrays.asList(2000, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31));
@@ -98,17 +99,55 @@ public class NepaliCalender {
         bs.add(Arrays.asList(2089, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30));
         bs.add(Arrays.asList(2090, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30));
 
-        nepEngNumMap.put("१","1");
-        nepEngNumMap.put("२","2");
-        nepEngNumMap.put("३","3");
-        nepEngNumMap.put("४","4");
-        nepEngNumMap.put("५","5");
-        nepEngNumMap.put("६","6");
-        nepEngNumMap.put("७","7");
-        nepEngNumMap.put("८","8");
-        nepEngNumMap.put("९","9");
-        nepEngNumMap.put("०","0");
-    }
+        nepEngUnicodeNumMap.put("१","1");
+        nepEngUnicodeNumMap.put("२","2");
+        nepEngUnicodeNumMap.put("३","3");
+        nepEngUnicodeNumMap.put("४","4");
+        nepEngUnicodeNumMap.put("५","5");
+        nepEngUnicodeNumMap.put("६","6");
+        nepEngUnicodeNumMap.put("७","7");
+        nepEngUnicodeNumMap.put("८","8");
+        nepEngUnicodeNumMap.put("९","9");
+        nepEngUnicodeNumMap.put("०","0");
+        nepEngUnicodeNumMap.put("1","१");
+        nepEngUnicodeNumMap.put("2","२");
+        nepEngUnicodeNumMap.put("3","३");
+        nepEngUnicodeNumMap.put("4","४");
+        nepEngUnicodeNumMap.put("5","५");
+        nepEngUnicodeNumMap.put("6","६");
+        nepEngUnicodeNumMap.put("7","७");
+        nepEngUnicodeNumMap.put("8","८");
+        nepEngUnicodeNumMap.put("9","९");
+        nepEngUnicodeNumMap.put("0","०");
+
+        nepEngUnicodeCharMap.put("बैशाख","Baishak");
+        nepEngUnicodeCharMap.put("बैसाक","Baishak");
+        nepEngUnicodeCharMap.put("बैषक","Baishak");
+        nepEngUnicodeCharMap.put("जेठ","Jestha");
+        nepEngUnicodeCharMap.put("आषाढ","Ashad");
+        nepEngUnicodeCharMap.put("श्रावण","Shrawn");
+        nepEngUnicodeCharMap.put("भाद्र","Bhadra");
+        nepEngUnicodeCharMap.put("आश्विन","Ashwin");
+        nepEngUnicodeCharMap.put("कार्तिक","kartik");
+        nepEngUnicodeCharMap.put("मंसिर","Mangshir");
+        nepEngUnicodeCharMap.put("पौष","Poush");
+        nepEngUnicodeCharMap.put("माघ","Magh");
+        nepEngUnicodeCharMap.put("फाल्गुण","Falgun");
+        nepEngUnicodeCharMap.put("चैत्र","Chaitra");
+        nepEngUnicodeCharMap.put("Baishak","बैशाख");
+        nepEngUnicodeCharMap.put("Jestha","जेठ");
+        nepEngUnicodeCharMap.put("Ashad","आषाढ");
+        nepEngUnicodeCharMap.put("Shrawn","श्रावण");
+        nepEngUnicodeCharMap.put("Bhadra","भाद्र");
+        nepEngUnicodeCharMap.put("Ashwin","आश्विन");
+        nepEngUnicodeCharMap.put("kartik","कार्तिक");
+        nepEngUnicodeCharMap.put("Mangshir","मंसिर");
+        nepEngUnicodeCharMap.put("Poush","पौष");
+        nepEngUnicodeCharMap.put("Magh","माघ");
+        nepEngUnicodeCharMap.put("Falgun","फाल्गुण");
+        nepEngUnicodeCharMap.put("Chaitra","चैत्र");
+
+        }
 
     public static void main(String[] args) {
         System.out.println("Hello");
@@ -117,24 +156,17 @@ public class NepaliCalender {
         //englishToNepali(2019,2,9);
         //englishToNepali(1943,2,9);
         //eng_to_nep(2019,2,9);
-        String test = nepEngNumMap.get("१");
-        System.out.println(test);
+        //String test = nepEngUnicodeNumMap.get("१");
+        englishToNepaliUnicode(2019,2,11);
+       // System.out.println(test);
 
     }
 
     public static boolean isLeadYear(Integer year) {
         if (0 == year % 100) {
-            if (0 == year % 400) {
-                return true;
-            } else {
-                return false;
-            }
+            return 0 == year % 400;
         } else {
-            if (0 == year % 4) {
-                return true;
-            } else {
-                return false;
-            }
+            return 0 == year % 4;
         }
     }
 
@@ -280,7 +312,7 @@ public class NepaliCalender {
         return true;
     }
 
-    public static void englishToNepali(int year, int month, int day) {
+    public static Map<String,String> englishToNepali(int year, int month, int day) {
         try {
             isRangeEnglish(year, month, day);
 
@@ -318,10 +350,10 @@ public class NepaliCalender {
 
 
             int nepYearHead = 2000; //spear hed neapli date
-            int diffNepEngDayInMonth = 17;
+            int diffNepEngDayInMonth = 18;
             int totalNepDays = 0;
             totalNepDays = diffNepEngDayInMonth;
-            int diffNepEngDayInWeek = 7;
+            int diffNepEngDayInWeek = 1;
             int i = 0;
 
 
@@ -357,6 +389,14 @@ public class NepaliCalender {
                 totalEngDays--;
             }
 
+            Map<String, String> nep_date_map =new HashMap<>();
+            nep_date_map.put("year", String.valueOf(y));
+            nep_date_map.put("month", String.valueOf(m));
+            nep_date_map.put("day", String.valueOf(totalNepDays));
+            nep_date_map.put("Month", getNepaliMonth(m));
+            nep_date_map.put("dayOfWeek", getEnglishDayOfWeek(diffNepEngDayInWeek));
+
+
             System.out.println("Total days in neplai" + totalNepDays);
             System.out.println("Nepali Year " + y);
             System.out.println("Nepali Month " + m);
@@ -364,16 +404,37 @@ public class NepaliCalender {
             System.out.println("Date " + totalNepDays);
             System.out.println("Day Full " + getEnglishDayOfWeek(diffNepEngDayInWeek));
             System.out.println("Day " + diffNepEngDayInWeek);
+            return  nep_date_map;
 
         } catch (Exception ex) {
             System.out.println("Out of Rannge"+ ex);
         }
+        return null;
     }
 
-    public void englishToNepaliUnicode(String year, String month, String day ){
+    public static void englishToNepaliUnicode(int year, int month, int day ){
 
-        //englishToNepali();
+        Map<String, String> neplaiDate = englishToNepali(year, month, day);
+
+        String npYear = unicodeEngNumMapper(neplaiDate.get("year").toCharArray());
+        String npMonth = unicodeEngNumMapper(neplaiDate.get("month").toCharArray());
+        String npDay = unicodeEngNumMapper(neplaiDate.get("day").toCharArray());
+        String npFullMonth = nepEngUnicodeCharMap.get(neplaiDate.get("Month"));
+
+
+        System.out.format("Year:: "+ npYear+" Month:: "+ npMonth + "Day:: "+ npDay + "Full Nepali Month:: "+ npFullMonth );
 
     }
+
+    private static String unicodeEngNumMapper(char[] engDateChar) {
+        List<String> nepDateChar = new ArrayList<>();
+
+        for (char c: engDateChar) {
+            nepDateChar.add(nepEngUnicodeNumMap.get(c+""));
+        }
+        return String.join("",nepDateChar);
+    }
+
+
 
 }
